@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>{{author}} Kullanıcısının Makaleleri</h1>
+
+{% if articles %}
+    <br>
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Başlık</th>
+        <th scope="col">Yazar</th>
+        <th scope="col">Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+            <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="{% url 'article:detail' article.id %}">{{article.title}}</a></td>
+            <td>{{article.author}}</td>
+            <td>{{article.created_date}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% else %}
+<div class = "alert alert-warning">Burada hiç makale yok.</div>
+{% endif %}
+{% endblock body %}
